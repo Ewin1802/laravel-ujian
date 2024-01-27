@@ -212,7 +212,7 @@ class UjianController extends Controller
              $timer_field => 0,
          ]);
 
-         //dd($ujian);
+         dd($ujian);
 
          return response()->json([
              'message' => 'Berhasil mendapatkan nilai',
