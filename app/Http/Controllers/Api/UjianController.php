@@ -232,20 +232,26 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
-        $kategori_verbal = $ujianSoalList(['nilai_verbal']);
-        $kategori_logika = $ujianSoalList(['nilai_logika']);
-        $kategori_angka = $ujianSoalList(['nilai_angka']);
-        $nilai_kategori = ($kategori_verbal + $kategori_logika + $kategori_angka) / 100;
+        // $kategori_verbal = $ujianSoalList(['nilai_verbal']);
+        // $kategori_logika = $ujianSoalList(['nilai_logika']);
+        // $kategori_angka = $ujianSoalList(['nilai_angka']);
+        // $nilai_kategori = ($kategori_verbal + $kategori_logika + $kategori_angka) / 100;
+        $verbal = $ujianSoalList(['nilai_verbal']);
+        $logika = $ujianSoalList(['nilai_logika']);
+        $angka = $ujianSoalList(['nilai_angka']);
+
+        $totalScore = $verbal + $logika + $angka;
+        $averageScore = $totalScore / 100;
 
 
-        if ($nilai_kategori < 60) {
+        if ($averageScore < 60) {
             $ujianSoalList->update(
                 [
                     'hasil' => 'Tidak Lulus'
                 ]
             );
         } else {
-            $ujianSoalList->update(
+            $averageScore->update(
                 [
                     'hasil' => 'Lulus'
                 ]
