@@ -235,7 +235,7 @@ class UjianController extends Controller
         $kategori_verbal = 'nilai_verbal';
         $kategori_logika = 'nilai_logika';
         $kategori_angka = 'nilai_angka';
-        $nilai_kategori = ($ujianSoalList->$kategori_verbal + $ujianSoalList->$kategori_logika + $ujianSoalList->$kategori_angka) / 100;
+        $nilai_kategori = ($kategori_verbal + $kategori_logika + $kategori_angka) / 100;
 
 
         if ($nilai_kategori < 60) {
