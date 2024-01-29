@@ -256,18 +256,9 @@ class UjianController extends Controller
             });
         }
 
-        // $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
-        // $totalSoal = $ujianSoalList->count();
-        // $nilai = ($totalBenar / $totalSoal) * 100;
 
 
-        // $ujian->update([
-        //     $kategori_field => $nilai,
-        //     $status_field => 'done',
-        //     $timer_field => 0,
-        // ]);
-
-        dd($ujian);
+        //dd($ujian);
 
         return response()->json([
             'message' => 'Berhasil mendapatkan nilai',
