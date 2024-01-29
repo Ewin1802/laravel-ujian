@@ -21,5 +21,6 @@ class Ujian extends Model
         'timer_angka',
         'timer_verbal',
         'timer_logika',
+        'hasil',
     ];
 }

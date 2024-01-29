@@ -184,8 +184,6 @@ class UjianController extends Controller
         });
 
         //hitung nilai
-
-
         $kategori_field = 'nilai_verbal';
         $status_field = 'status_verbal';
         $timer_field = 'timer_verbal';
@@ -216,4 +214,58 @@ class UjianController extends Controller
             'nilai' => $nilai,
         ], 200);
     }
+
+    //hasil ujian by kategori
+    public function hitungHasilUjianByKategori(Request $request)
+    {
+        $kategori = $request->kategori;
+        $ujian = Ujian::where('user_id', $request->user()->id)->first();
+        if (!$ujian) {
+            return response()->json([
+                'message' => 'Hasil Ujian tidak ditemukan',
+                'data' => [],
+            ], 200);
+        }
+        $ujianSoalList = UjianSoalList::where('ujian_id', $ujian->id)->get();
+        //ujiansoallist by kategori
+        $ujianSoalList = $ujianSoalList->filter(function ($value, $key) use ($kategori) {
+            return $value->soal->kategori == $kategori;
+        });
+
+        $nilai_kategori =  $ujianSoalList->where('nilai_logika' + 'nilai_verbal' + 'nilai_angka') / 100;
+
+
+        if ($nilai_kategori < 60) {
+            $ujianSoalList->update(
+                [
+                    'hasil' => 'Tidak Lulus'
+                ]
+            );
+        } else {
+            $ujianSoalList->update(
+                [
+                    'hasil' => 'Lulus'
+                ]
+            );
+        }
+
+        // $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
+        // $totalSoal = $ujianSoalList->count();
+        // $nilai = ($totalBenar / $totalSoal) * 100;
+
+
+        // $ujian->update([
+        //     $kategori_field => $nilai,
+        //     $status_field => 'done',
+        //     $timer_field => 0,
+        // ]);
+
+        dd($ujian);
+
+        return response()->json([
+            'message' => 'Berhasil mendapatkan nilai',
+            'nilai' => $nilai,
+        ], 200);
+    }
+
 }
