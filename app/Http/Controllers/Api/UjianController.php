@@ -233,12 +233,15 @@ class UjianController extends Controller
         });
 
         $totalSoal = $ujianSoalList->count();
-        $totalAngka = $ujianSoalList->sum(function ($item) {
-            return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-        });
+        // $totalAngka = $ujianSoalList->sum(function ($item) {
+        //     return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
+        // });
+        $totalAngka = DB::table('ujians')
+        ->select(DB::raw('SUM(nilai_verbal + nilai_logika + nilai_angka) as total'))
+        ->first()
+        ->total;
 
-        // Total nilai dibagi dengan jumlah soal, lalu dikalikan dengan 100
-        $totalNilai = ($totalAngka / 3);
+        $hasilUpdate = ($totalAngka / $totalSoal);
 
         $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
 
@@ -252,7 +255,7 @@ class UjianController extends Controller
         //dd($ujian);
 
         return response()->json([
-            'message' => $totalAngka,
+            'jumlah' => $totalAngka,
             'hasil' => $hasilUpdate,
         ], 200);
     }
