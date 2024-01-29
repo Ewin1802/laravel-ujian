@@ -236,29 +236,22 @@ class UjianController extends Controller
             return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
         }) / 100;
 
-        if ($totalNilai < 60) {
-            // Menggunakan metode update pada setiap item dalam koleksi
-            $ujianSoalList->each(function ($item) {
-                $item->update([
-                    hasil => 'Tidak Lulus'
-                ]);
-            });
-        } else {
-            // Jika totalNilai lebih besar atau sama dengan 60, maka update seluruh koleksi
-            $ujianSoalList->each(function ($item) {
-                $item->update([
-                    hasil => 'Lulus'
-                ]);
-            });
-        }
+        $hasilUpdate = ($totalNilai < 60) ? 'Tidak Lulus' : 'Lulus';
 
-        $total = 'hasil';
+        // Menggunakan metode update pada setiap item dalam koleksi
+        $ujianSoalList->each(function ($item) use ($hasilUpdate) {
+            $item->update([
+                'hasil' => $hasilUpdate
+            ]);
+        });
+
+
 
         //dd($ujian);
 
         return response()->json([
             'message' => 'Berhasil mendapatkan hasil',
-            'hasil' => $total,
+            'hasil' => $hasilUpdate,
         ], 200);
     }
 
