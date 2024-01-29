@@ -232,12 +232,12 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
-        $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
+        //$totalBenar = $ujianSoalList->where('kebenaran', true)->count();
         $totalSoal = $ujianSoalList->count();
-        // $totalNilai = $ujianSoalList->sum(function ($item) {
-        //     return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-        // }) / 3;
-        $totalNilai = ($totalBenar / $totalSoal) * 100;
+        $totalangka = $ujianSoalList->sum(function ($item) {
+            return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
+        });
+        $totalNilai = ($totalangka / $totalSoal) * 100;
 
         $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
 
