@@ -248,7 +248,7 @@ class UjianController extends Controller
             ]);
         });
 
-        dd($ujian);
+        //dd($ujian);
 
         return response()->json([
             'message' => 'Berhasil mendapatkan hasil',
