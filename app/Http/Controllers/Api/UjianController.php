@@ -242,7 +242,7 @@ class UjianController extends Controller
         });
 
 
-        $hasilUpdate = ($totalAngka / $totalSoal);
+        $totalNilai = ($totalAngka / 3);
 
         $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
 
