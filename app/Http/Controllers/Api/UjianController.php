@@ -192,10 +192,16 @@ class UjianController extends Controller
          $totalSoal = $ujianSoalList->count();
          $nilai = ($totalBenar / $totalSoal) * 100;
 
-         $kategori_field = 'nilai_verbal';
-         $status_field = 'status_verbal';
-         $timer_field = 'timer_verbal';
-         if ($kategori == 'Numeric') {
+        //  $kategori_field = 'nilai_verbal';
+        //  $status_field = 'status_verbal';
+        //  $timer_field = 'timer_verbal';
+
+         if ($kategori == 'Verbal') {
+            $kategori_field = 'nilai_verbal';
+            $status_field = 'status_verbal';
+            $timer_field = 'timer_verbal';
+        }
+         else if ($kategori == 'Numeric') {
              $kategori_field = 'nilai_angka';
              $status_field = 'status_angka';
              $timer_field = 'timer_angka';
