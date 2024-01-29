@@ -237,7 +237,7 @@ class UjianController extends Controller
         $totalangka = $ujianSoalList->sum(function ($item) {
             return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
         });
-        $totalNilai = ($totalangka / $totalSoal) * 100;
+        $totalNilai = ($totalangka) * 100;
 
         $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
 
