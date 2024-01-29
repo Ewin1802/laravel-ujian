@@ -232,22 +232,16 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
-        $totalNilai = $ujianSoalList->sum(function ($item) {
-            return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-        }) / 300;
+        $ujianSoalList->each(function ($item) {
+            $totalNilai = $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
+            $hasilUpdate = ($totalNilai < 60) ? 'Tidak Lulus' : 'Lulus';
 
-        $hasilUpdate = ($totalNilai < 0.85) ? 'Tidak Lulus' : 'Lulus';
-
-        // Menggunakan metode update pada setiap item dalam koleksi
-        $ujianSoalList->each(function ($item) use ($hasilUpdate) {
             $item->update([
                 'hasil' => $hasilUpdate
             ]);
         });
 
-
-
-        //dd($ujian);
+        dd($ujian);
 
         return response()->json([
             'message' => 'Berhasil mendapatkan hasil',
