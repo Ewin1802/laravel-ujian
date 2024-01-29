@@ -232,9 +232,9 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
-        $kategori_verbal = $ujianSoalList->where('nilai_verbal', $request->user()->id);
-        $kategori_logika = $ujianSoalList->where('nilai_logika', $request->user()->id);
-        $kategori_angka = $ujianSoalList->where('nilai_angka', $request->user()->id);
+        $kategori_verbal = $ujianSoalList->nilai_verbal;
+        $kategori_logika = $ujianSoalList->nilai_logika;
+        $kategori_angka = $ujianSoalList->nilai_angka;
         $nilai_kategori = ($kategori_verbal + $kategori_logika + $kategori_angka) / 100;
 
 
