@@ -252,13 +252,13 @@ class UjianController extends Controller
             });
         }
 
-
+        $timer_field = 'hasil';
 
         //dd($ujian);
 
         return response()->json([
             'message' => 'Berhasil mendapatkan hasil',
-            'hasil' => $totalNilai,
+            'hasil' => hasil,
         ], 200);
     }
 
