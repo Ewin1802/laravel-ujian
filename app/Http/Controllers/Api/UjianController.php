@@ -184,21 +184,28 @@ class UjianController extends Controller
         });
 
         //hitung nilai
-        $totalBenar = $ujianSoalList->where('kebenaran', 1)->count();
-        $totalSoal = $ujianSoalList->count();
-        $nilai = ($totalBenar / $totalSoal) * 100;
+
 
         $kategori_field = 'nilai_verbal';
         $status_field = 'status_verbal';
         $timer_field = 'timer_verbal';
+        $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
+        $totalSoal = $ujianSoalList->count();
+        $nilai = ($totalBenar / $totalSoal) * 100;
         if ($kategori == 'Numeric') {
             $kategori_field = 'nilai_angka';
             $status_field = 'status_angka';
             $timer_field = 'timer_angka';
+            $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
+            $totalSoal = $ujianSoalList->count();
+            $nilai = ($totalBenar / $totalSoal) * 100;
         } else if ($kategori == 'Logika') {
             $kategori_field = 'nilai_logika';
             $status_field = 'status_logika';
             $timer_field = 'timer_logika';
+            $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
+            $totalSoal = $ujianSoalList->count();
+            $nilai = ($totalBenar / $totalSoal) * 100;
         }
 
         $ujian->update([
