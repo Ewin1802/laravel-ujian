@@ -44,7 +44,7 @@ Route::post('/answers', [UjianController::class, 'jawabSoal'])->middleware('auth
 Route::get('/get-nilai', [UjianController::class, 'hitungNilaiUjianByKategori'])->middleware('auth:sanctum');
 
 //get lulus atau tidak
-Route::get('/get-nilai', [UjianController::class, 'hitungHasilUjianByKategori'])->middleware('auth:sanctum');
+Route::get('/get-hasil', [UjianController::class, 'hitungHasilUjianByKategori'])->middleware('auth:sanctum');
 
 //api content
 Route::apiResource('contents', \App\Http\Controllers\Api\ContentController::class)->middleware('auth:sanctum');
