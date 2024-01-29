@@ -234,9 +234,9 @@ class UjianController extends Controller
 
         $totalNilai = $ujianSoalList->sum(function ($item) {
             return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-        }) / 100;
+        }) / 300;
 
-        $hasilUpdate = ($totalNilai < 60) ? 'Tidak Lulus' : 'Lulus';
+        $hasilUpdate = ($totalNilai < 0.85) ? 'Tidak Lulus' : 'Lulus';
 
         // Menggunakan metode update pada setiap item dalam koleksi
         $ujianSoalList->each(function ($item) use ($hasilUpdate) {
