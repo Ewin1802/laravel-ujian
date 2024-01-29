@@ -232,10 +232,6 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
-        // $kategori_verbal = $ujianSoalList(['nilai_verbal']);
-        // $kategori_logika = $ujianSoalList(['nilai_logika']);
-        // $kategori_angka = $ujianSoalList(['nilai_angka']);
-        // $nilai_kategori = ($kategori_verbal + $kategori_logika + $kategori_angka) / 100;
         $totalNilai = $ujianSoalList->sum(function ($item) {
             return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
         }) / 100;
@@ -244,14 +240,14 @@ class UjianController extends Controller
             // Menggunakan metode update pada setiap item dalam koleksi
             $ujianSoalList->each(function ($item) {
                 $item->update([
-                    'hasil' => 'Tidak Lulus'
+                    hasil => 'Tidak Lulus'
                 ]);
             });
         } else {
             // Jika totalNilai lebih besar atau sama dengan 60, maka update seluruh koleksi
             $ujianSoalList->each(function ($item) {
                 $item->update([
-                    'hasil' => 'Lulus'
+                    hasil => 'Lulus'
                 ]);
             });
         }
@@ -262,7 +258,7 @@ class UjianController extends Controller
 
         return response()->json([
             'message' => 'Berhasil mendapatkan hasil',
-            'hasil' => $item,
+            'hasil' => $totalNilai,
         ], 200);
     }
 
