@@ -262,7 +262,7 @@ class UjianController extends Controller
 
         return response()->json([
             'message' => 'Berhasil mendapatkan hasil',
-            'hasil' => $totalNilai,
+            'hasil' => $item,
         ], 200);
     }
 
