@@ -236,8 +236,8 @@ class UjianController extends Controller
         // $totalAngka = $ujianSoalList->sum(function ($item) {
         //     return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
         // });
-        $totalAngka = DB::table('ujians')
-        ->select(DB::raw('SUM(nilai_verbal + nilai_logika + nilai_angka) as total'))
+        $totalAngka = Ujian::table('ujians')
+        ->select(Ujian::raw('SUM(nilai_verbal + nilai_logika + nilai_angka) as total'))
         ->first()
         ->total;
 
