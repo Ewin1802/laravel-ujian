@@ -238,7 +238,7 @@ class UjianController extends Controller
         });
 
         // Total nilai dibagi dengan jumlah soal, lalu dikalikan dengan 100
-        $totalNilai = ($totalAngka / ($totalSoal * 3)) * 100;
+        $totalNilai = ($totalAngka / 3);
 
         $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
 
