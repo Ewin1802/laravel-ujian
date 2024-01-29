@@ -234,15 +234,16 @@ class UjianController extends Controller
 
         $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
         $totalSoal = $ujianSoalList->count();
-        $totalNilai = $ujianSoalList->sum(function ($item) {
-            return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-        }) / 3;
+        // $totalNilai = $ujianSoalList->sum(function ($item) {
+        //     return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
+        // }) / 3;
+        $totalNilai = ($totalBenar / $totalSoal) * 100;
 
         $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
 
         $ujianSoalList->each(function ($item) {
             $totalNilai = $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-            $hasilUpdate = ($totalNilai <85) ? 'Tidak Lulus' : 'Lulus';
+            $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
             $item->update([
                 'hasil' => $hasilUpdate
             ]);
