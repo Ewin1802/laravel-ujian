@@ -184,7 +184,7 @@ class UjianController extends Controller
         });
 
         //hitung nilai
-        $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
+        $totalBenar = $ujianSoalList->where('kebenaran', 1)->count();
         $totalSoal = $ujianSoalList->count();
         $nilai = ($totalBenar / $totalSoal) * 100;
 
