@@ -241,17 +241,19 @@ class UjianController extends Controller
         }) / 100;
 
         if ($totalNilai < 60) {
-            $ujianSoalList->update(
-                [
+            // Menggunakan metode update pada setiap item dalam koleksi
+            $ujianSoalList->each(function ($item) {
+                $item->update([
                     'hasil' => 'Tidak Lulus'
-                ]
-            );
+                ]);
+            });
         } else {
-            $totalNilai->update(
-                [
+            // Jika totalNilai lebih besar atau sama dengan 60, maka update seluruh koleksi
+            $ujianSoalList->each(function ($item) {
+                $item->update([
                     'hasil' => 'Lulus'
-                ]
-            );
+                ]);
+            });
         }
 
         // $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
