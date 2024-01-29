@@ -232,10 +232,15 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
+        $totalNilai = $ujianSoalList->sum(function ($item) {
+            return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
+        }) / 100;
+
+        $hasilUpdate = ($totalNilai < 60) ? 'Tidak Lulus' : 'Lulus';
+
         $ujianSoalList->each(function ($item) {
             $totalNilai = $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
             $hasilUpdate = ($totalNilai < 60) ? 'Tidak Lulus' : 'Lulus';
-
             $item->update([
                 'hasil' => $hasilUpdate
             ]);
