@@ -232,14 +232,15 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
-        $totalSoal = $ujianSoalList->count();
-        // $totalAngka = $ujianSoalList->sum(function ($item) {
-        //     return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-        // });
-        $totalAngka = Ujian::table('ujians')
-        ->select(Ujian::raw('SUM(nilai_verbal + nilai_logika + nilai_angka) as total'))
-        ->first()
-        ->total;
+
+
+        $nilai_verbal = 'nilai_verbal' ;
+        $nilai_angka = 'nilai_angka' ;
+        $nilai_logika = 'nilai_logika' ;
+        $totalAngka = $ujianSoalList->sum(function ($item) {
+            return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
+        });
+
 
         $hasilUpdate = ($totalAngka / $totalSoal);
 
