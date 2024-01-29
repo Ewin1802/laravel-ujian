@@ -237,9 +237,10 @@ class UjianController extends Controller
         $nilai_verbal = 'nilai_verbal' ;
         $nilai_angka = 'nilai_angka' ;
         $nilai_logika = 'nilai_logika' ;
-        $totalAngka = $ujianSoalList->sum(function ($item) {
-            return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-        });
+        $totalAngka = $nilai_verbal + $nilai_logika + $nilai_angka;
+        // $totalAngka = $ujianSoalList->sum(function ($item) {
+        //     return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
+        // });
 
 
         $totalNilai = ($totalAngka / 3);
