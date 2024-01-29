@@ -232,18 +232,18 @@ class UjianController extends Controller
             return $value->soal->kategori == $kategori;
         });
 
-        //$totalBenar = $ujianSoalList->where('kebenaran', true)->count();
         $totalSoal = $ujianSoalList->count();
-        $totalangka = $ujianSoalList->sum(function ($item) {
+        $totalAngka = $ujianSoalList->sum(function ($item) {
             return $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
         });
-        $totalNilai = ($totalangka) * 100;
+
+        // Total nilai dibagi dengan jumlah soal, lalu dikalikan dengan 100
+        $totalNilai = ($totalAngka / ($totalSoal * 3)) * 100;
 
         $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
 
-        $ujianSoalList->each(function ($item) {
-            $totalNilai = $item->nilai_verbal + $item->nilai_logika + $item->nilai_angka;
-            $hasilUpdate = ($totalNilai < 85) ? 'Tidak Lulus' : 'Lulus';
+        // Update kolom 'hasil' pada setiap item dalam koleksi
+        $ujianSoalList->each(function ($item) use ($hasilUpdate) {
             $item->update([
                 'hasil' => $hasilUpdate
             ]);
