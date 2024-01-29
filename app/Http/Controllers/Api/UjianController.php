@@ -261,8 +261,8 @@ class UjianController extends Controller
         //dd($ujian);
 
         return response()->json([
-            'message' => 'Berhasil mendapatkan nilai',
-            'nilai' => $nilai,
+            'message' => 'Berhasil mendapatkan hasil',
+            'hasil' => $totalNilai,
         ], 200);
     }
 
